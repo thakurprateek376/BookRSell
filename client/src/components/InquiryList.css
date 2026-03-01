@@ -1,0 +1,485 @@
+.inquiries-container {
+  padding: 28px;
+  background: white;
+  border-radius: 12px;
+  margin: 30px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.inquiries-container h4 {
+  margin-bottom: 28px;
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.no-inquiries {
+  text-align: center;
+  color: #9ca3af;
+  padding: 50px 20px;
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.inquiries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.inquiry-item {
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 4px solid #2563eb;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.inquiry-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.inquiry-item.status-pending {
+  border-left-color: #f59e0b;
+}
+
+.inquiry-item.status-accepted {
+  border-left-color: #10b981;
+}
+
+.inquiry-item.status-rejected {
+  border-left-color: #ef4444;
+}
+
+.inquiry-item.status-sold {
+  border-left-color: #9ca3af;
+}
+
+.inquiry-main-info {
+  flex: 1;
+}
+
+.inquiry-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.inquiry-title h6 {
+  margin: 0;
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.status-pending {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #92400e;
+}
+
+.status-badge.status-accepted {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #065f46;
+}
+
+.status-badge.status-rejected {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #7f1d1d;
+}
+
+.status-badge.status-sold {
+  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+  color: #374151;
+}
+
+.inquiry-details {
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.inquiry-details p {
+  margin: 8px 0;
+}
+
+.inquiry-details strong {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.inquiry-date {
+  display: block;
+  color: #9ca3af;
+  margin-top: 12px;
+  font-size: 0.85rem;
+}
+
+.inquiry-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: fit-content;
+}
+
+.inquiry-actions .btn {
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  white-space: nowrap;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .inquiry-item {
+    flex-direction: column;
+  }
+
+  .inquiry-title {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .inquiry-actions {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .inquiry-actions .btn {
+    flex: 1;
+  }
+
+  .pagination-controls {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .page-info {
+    gap: 4px;
+  }
+
+  .page-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 15px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e5e7eb;
+  border-top: 4px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+  color: #6b7280;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Error Alert Improvements */
+.alert-danger.error-alert {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-left: 4px solid #ef4444;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  flex: 1;
+  color: #991b1b;
+  font-size: 14px;
+}
+
+.retry-info {
+  background-color: #fecaca;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.retry-btn {
+  color: #ef4444;
+  border-color: #ef4444;
+  padding: 8px 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.retry-btn:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* Inquiry Stats */
+.inquiries-stats {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-badge {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1e40af;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #93c5fd;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.pagination-controls .btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.pagination-controls .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 40px;
+}
+
+.loading-text {
+  color: #6b7280;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.page-btn {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-width: 40px;
+  text-align: center;
+}
+
+.page-btn:hover:not(:disabled) {
+  background-color: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.page-btn.active {
+  background-color: #2563eb;
+  color: white;
+  border-color: #2563eb;
+  font-weight: 700;
+}
+
+.page-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.inquiries-container h4 {
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+.no-inquiries {
+  text-align: center;
+  color: #999;
+  padding: 30px 0;
+  font-style: italic;
+}
+
+.inquiries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.inquiry-item {
+  background-color: white;
+  padding: 15px;
+  border-radius: 6px;
+  border-left: 5px solid #007bff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.inquiry-item.status-pending {
+  border-left-color: #ffc107;
+}
+
+.inquiry-item.status-accepted {
+  border-left-color: #28a745;
+}
+
+.inquiry-item.status-rejected {
+  border-left-color: #dc3545;
+}
+
+.inquiry-item.status-sold {
+  border-left-color: #6c757d;
+}
+
+.inquiry-main-info {
+  flex: 1;
+}
+
+.inquiry-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.inquiry-title h6 {
+  margin: 0;
+  color: #333;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.status-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.status-badge.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.status-accepted {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-badge.status-rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status-badge.status-sold {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
+.inquiry-details {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.inquiry-details p {
+  margin: 6px 0;
+}
+
+.inquiry-details strong {
+  color: #333;
+}
+
+.inquiry-date {
+  display: block;
+  color: #999;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.inquiry-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: fit-content;
+}
+
+.inquiry-actions .btn {
+  font-size: 12px;
+  padding: 6px 12px;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .inquiry-item {
+    flex-direction: column;
+  }
+
+  .inquiry-title {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .inquiry-actions {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .inquiry-actions .btn {
+    flex: 1;
+  }
+}

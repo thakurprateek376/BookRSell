@@ -1,0 +1,272 @@
+.reviews-container {
+  margin: 40px 0;
+  padding: 28px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 20px;
+}
+
+.reviews-header h4 {
+  margin: 0;
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.average-rating {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.rating-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fbbf24;
+  line-height: 1;
+}
+
+.out-of {
+  color: #9ca3af;
+  font-size: 0.95rem;
+}
+
+.rating-count {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.no-reviews {
+  text-align: center;
+  color: #9ca3af;
+  padding: 40px 20px;
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.review-item {
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 4px solid #2563eb;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.review-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.reviewer-name {
+  margin: 0 0 6px 0;
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.review-date {
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+.star-display {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 8px;
+}
+
+.star-display .star {
+  color: #d1d5db;
+  font-size: 18px;
+}
+
+.star-display .star.filled {
+  color: #fbbf24;
+  filter: drop-shadow(0 1px 2px rgba(251, 191, 36, 0.3));
+}
+
+.review-comment {
+  color: #374151;
+  line-height: 1.6;
+  margin: 12px 0;
+  font-size: 0.95rem;
+}
+
+.helpful-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #2563eb;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.helpful-count:hover {
+  background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+  transform: translateY(-1px);
+}
+
+.helpful-count i {
+  font-size: 0.9rem;
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 20px;
+}
+
+.reviews-header h4 {
+  margin: 0;
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.average-rating {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.rating-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffc107;
+}
+
+.out-of {
+  color: #999;
+  font-size: 14px;
+}
+
+.rating-count {
+  color: #666;
+  font-size: 14px;
+}
+
+.no-reviews {
+  text-align: center;
+  color: #999;
+  padding: 20px 0;
+  font-style: italic;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.review-item {
+  background-color: white;
+  padding: 15px;
+  border-radius: 6px;
+  border-left: 4px solid #007bff;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.reviewer-name {
+  margin: 0 0 5px 0;
+  color: #333;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.review-date {
+  color: #999;
+  font-size: 12px;
+}
+
+.star-display {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 5px;
+}
+
+.star-display .star {
+  color: #ddd;
+  font-size: 16px;
+}
+
+.star-display .star.filled {
+  color: #ffc107;
+}
+
+.review-comment {
+  color: #555;
+  line-height: 1.5;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.helpful-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #007bff;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: #f0f8ff;
+  transition: all 0.2s ease;
+}
+
+.helpful-count:hover {
+  background-color: #e6f0ff;
+}
+
+.helpful-count i {
+  font-size: 12px;
+}
