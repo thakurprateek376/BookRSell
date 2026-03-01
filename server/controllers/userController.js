@@ -1,6 +1,5 @@
 const User = require('../models/User');
 
-// Get user profile (protected route)
 exports.getProfile = async (req, res) => {
   try {
     const user = await User.findById(req.userId);
@@ -15,7 +14,6 @@ exports.getProfile = async (req, res) => {
   }
 };
 
-// Update user profile (protected route)
 exports.updateProfile = async (req, res) => {
   try {
     const { name, city, phone } = req.body;
@@ -33,7 +31,6 @@ exports.updateProfile = async (req, res) => {
   }
 };
 
-// Get seller info
 exports.getSellerInfo = async (req, res) => {
   try {
     const seller = await User.findById(req.params.id);

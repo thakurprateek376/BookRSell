@@ -10,7 +10,6 @@ const {
 const authMiddleware = require('../middleware/authMiddleware');
 const { body, validationResult } = require('express-validator');
 
-// Create review
 router.post(
   '/create/:bookId',
   authMiddleware,
@@ -28,10 +27,8 @@ router.post(
   createReview
 );
 
-// Get reviews for a book
 router.get('/book/:bookId', getBookReviews);
 
-// Update review
 router.put(
   '/update/:id',
   authMiddleware,
@@ -49,10 +46,8 @@ router.put(
   updateReview
 );
 
-// Delete review
 router.delete('/delete/:id', authMiddleware, deleteReview);
 
-// Mark review as helpful
 router.put('/helpful/:id', authMiddleware, markAsHelpful);
 
 module.exports = router;

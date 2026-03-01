@@ -11,7 +11,6 @@ const {
 const authMiddleware = require('../middleware/authMiddleware');
 const { body, validationResult } = require('express-validator');
 
-// Create inquiry
 router.post(
   '/create/:bookId',
   authMiddleware,
@@ -29,13 +28,10 @@ router.post(
   createInquiry
 );
 
-// Get inquiries sent by buyer
 router.get('/buyer', authMiddleware, getBuyerInquiries);
 
-// Get inquiries received by seller
 router.get('/seller', authMiddleware, getSellerInquiries);
 
-// Update inquiry status (seller only)
 router.put(
   '/status/:id',
   authMiddleware,
@@ -52,10 +48,8 @@ router.put(
   updateInquiryStatus
 );
 
-// Mark inquiry as read
 router.put('/read/:id', authMiddleware, markAsRead);
 
-// Delete inquiry
 router.delete('/delete/:id', authMiddleware, deleteInquiry);
 
 module.exports = router;
