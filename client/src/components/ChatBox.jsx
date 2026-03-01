@@ -22,31 +22,24 @@ const ChatBox = ({ conversationId, onClose, otherUser }) => {
   const previousMessageCountRef = useRef(0);
   const userScrolledUpRef = useRef(false);
 
-  // Fetch messages ONLY via REST API (memoized to prevent re-creation)
   const fetchMessages = useCallback(async () => {
     try {
       const response = await chatAPI.getMessages(conversationId);
       setMessages(response.data || []);
     } catch (err) {
-      console.error('❌ Error fetching messages:', err);
+      console.error('Error fetching messages:', err);
     }
   }, [conversationId]);
 
-  // Initialize Socket.io and polling
   useEffect(() => {
     const initializeChat = async () => {
       try {
         setLoading(true);
         setError('');
         
-        // Fetch initial messages via REST API
-        console.log('📥 Fetching initial messages from REST API...');
         await fetchMessages();
         
-        // Initialize Socket.io ONLY for typing indicators and presence
         if (!socketRef.current || !socketRef.current.connected) {
-          console.log('🔌 Connecting to Socket.io...');
-          
           socketRef.current = io('http://localhost:5000', {
             reconnection: true,
             reconnectionDelay: 500,
@@ -55,39 +48,33 @@ const ChatBox = ({ conversationId, onClose, otherUser }) => {
             transports: ['websocket', 'polling'],
           });
 
-          // Join conversation room
           socketRef.current.on('connect', () => {
-            console.log('✅ Socket.io connected');
             socketRef.current.emit('join-conversation', conversationId, currentUser.id);
           });
 
-          // Listen for typing indicators ONLY
           socketRef.current.on('user-typing', (data) => {
             if (data.userId !== currentUser.id) {
               setOtherUserTyping(data.isTyping);
             }
           });
 
-          // Listen for user online/offline status
           socketRef.current.on('user-status-changed', (data) => {
             if (data.userId !== currentUser.id) {
-              console.log(`👤 User ${data.userId} is ${data.isOnline ? 'online' : 'offline'}`);
               setOtherUserOnline(data.isOnline);
             }
           });
 
           socketRef.current.on('connect_error', (error) => {
-            console.warn('⚠️ Socket error:', error.message);
+            console.warn('Socket error:', error.message);
           });
 
           socketRef.current.on('disconnect', () => {
-            console.log('🔴 Socket.io disconnected');
           });
         }
 
         setLoading(false);
       } catch (err) {
-        console.error('❌ Error initializing chat:', err);
+        console.error('Error initializing chat:', err);
         setError('Failed to load messages');
         setLoading(false);
       }
@@ -95,13 +82,11 @@ const ChatBox = ({ conversationId, onClose, otherUser }) => {
 
     initializeChat();
 
-    // START POLLING: Fetch messages every 5 seconds (REST API is source of truth)
     pollIntervalRef.current = setInterval(async () => {
       await fetchMessages();
     }, 5000);
 
     return () => {
-      // Cleanup
       if (pollIntervalRef.current) {
         clearInterval(pollIntervalRef.current);
       }
@@ -111,30 +96,23 @@ const ChatBox = ({ conversationId, onClose, otherUser }) => {
     };
   }, [conversationId, currentUser.id, fetchMessages]);
 
-  // Handle scroll detection - check if user scrolled up
   const handleScroll = () => {
     if (messagesContainerRef.current) {
       const { scrollHeight, scrollTop, clientHeight } = messagesContainerRef.current;
-      // If user is not at bottom (more than 100px from bottom), mark as scrolled up
       userScrolledUpRef.current = scrollHeight - scrollTop - clientHeight > 100;
     }
   };
 
-  // Auto scroll to bottom ONLY when new message arrives
   useEffect(() => {
-    // Only auto-scroll if user hasn't scrolled up to read older messages
     if (!userScrolledUpRef.current && messages.length > previousMessageCountRef.current) {
-      // Small delay to ensure DOM is updated
       setTimeout(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
       }, 0);
     }
     
-    // Update the message count for next comparison
     previousMessageCountRef.current = messages.length;
   }, [messages.length]);
 
-  // Send message - REST API ONLY
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!newMessage.trim()) return;
@@ -144,24 +122,19 @@ const ChatBox = ({ conversationId, onClose, otherUser }) => {
     try {
       startLoading('Sending...');
       
-      // Send via REST API ONLY
       await chatAPI.sendMessage(conversationId, messageToSend);
-      console.log('✅ Message sent to database');
 
-      // Clear input
       setNewMessage('');
       setIsTyping(false);
       
-      // Fetch immediately to show message
       await fetchMessages();
       
-      // Reset scroll detection after sending
       userScrolledUpRef.current = false;
-      
+
       stopLoading();
     } catch (err) {
       stopLoading();
-      console.error('❌ Send failed:', err);
+      console.error('Send failed:', err);
       setError('Failed to send message');
       setTimeout(() => setError(''), 3000);
     }
@@ -171,7 +144,6 @@ const ChatBox = ({ conversationId, onClose, otherUser }) => {
     const value = e.target.value;
     setNewMessage(value);
 
-    // Send typing indicator via Socket.io
     if (socketRef.current && !isTyping && value.trim()) {
       setIsTyping(true);
       socketRef.current.emit('typing', {
@@ -180,12 +152,10 @@ const ChatBox = ({ conversationId, onClose, otherUser }) => {
         isTyping: true,
       });
 
-      // Clear previous timeout
       if (typingTimeoutRef.current) {
         clearTimeout(typingTimeoutRef.current);
       }
 
-      // Send stop typing after 2 seconds
       typingTimeoutRef.current = setTimeout(() => {
         setIsTyping(false);
         socketRef.current?.emit('typing', {
@@ -243,7 +213,6 @@ const ChatBox = ({ conversationId, onClose, otherUser }) => {
         overflow: 'hidden',
       }}
     >
-      {/* Header */}
       <div
         style={{
           backgroundColor: '#2563eb',
@@ -308,7 +277,6 @@ const ChatBox = ({ conversationId, onClose, otherUser }) => {
         </button>
       </div>
 
-      {/* Error Message */}
       {error && (
         <div
           style={{
@@ -323,7 +291,6 @@ const ChatBox = ({ conversationId, onClose, otherUser }) => {
         </div>
       )}
 
-      {/* Messages Container */}
       <div
         ref={messagesContainerRef}
         onScroll={handleScroll}
@@ -432,7 +399,6 @@ const ChatBox = ({ conversationId, onClose, otherUser }) => {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Area */}
       <form
         onSubmit={handleSendMessage}
         style={{
