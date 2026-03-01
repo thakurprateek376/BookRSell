@@ -1,11 +1,9 @@
 const Book = require('../models/Book');
 
-// Get all books with filters
 exports.getBooks = async (req, res) => {
   try {
     const { category, city, minPrice, maxPrice, search, page = 1, limit = 10 } = req.query;
 
-    // Build filter object
     const filter = { isActive: true };
 
     if (category) filter.category = category;
@@ -30,7 +28,6 @@ exports.getBooks = async (req, res) => {
       .skip(skip)
       .sort({ createdAt: -1 });
 
-    // Normalize image paths (fix backslashes for Windows compatibility)
     books = books.map(book => ({
       ...book.toObject(),
       image: book.image ? book.image.replace(/\\/g, '/') : null
@@ -50,7 +47,6 @@ exports.getBooks = async (req, res) => {
   }
 };
 
-// Get single book
 exports.getBook = async (req, res) => {
   try {
     let book = await Book.findById(req.params.id).populate(
@@ -62,7 +58,6 @@ exports.getBook = async (req, res) => {
       return res.status(404).json({ message: 'Book not found' });
     }
 
-    // Normalize image path (fix backslashes for Windows compatibility)
     book = book.toObject();
     if (book.image) {
       book.image = book.image.replace(/\\/g, '/');
@@ -74,13 +69,11 @@ exports.getBook = async (req, res) => {
   }
 };
 
-// Add book (protected route)
 exports.addBook = async (req, res) => {
   try {
     const { title, author, price, category, description, city, condition } = req.body;
     const sellerId = req.userId;
 
-    // Normalize image path to use forward slashes (for Windows compatibility)
     const image = req.file ? req.file.path.replace(/\\/g, '/') : null;
 
     const book = new Book({
@@ -108,7 +101,6 @@ exports.addBook = async (req, res) => {
   }
 };
 
-// Update book (protected route)
 exports.updateBook = async (req, res) => {
   try {
     const { title, author, price, category, description, city, condition, isActive } = req.body;
@@ -135,7 +127,6 @@ exports.updateBook = async (req, res) => {
     book.isActive = isActive !== undefined ? isActive : book.isActive;
 
     if (req.file) {
-      // Normalize image path to use forward slashes (for Windows compatibility)
       book.image = req.file.path.replace(/\\/g, '/');
     }
 
@@ -147,7 +138,6 @@ exports.updateBook = async (req, res) => {
   }
 };
 
-// Delete book (protected route)
 exports.deleteBook = async (req, res) => {
   try {
     const bookId = req.params.id;
@@ -171,14 +161,12 @@ exports.deleteBook = async (req, res) => {
   }
 };
 
-// Get seller's books (protected route)
 exports.getSellerBooks = async (req, res) => {
   try {
     const userId = req.userId;
 
     let books = await Book.find({ seller: userId }).sort({ createdAt: -1 });
 
-    // Normalize image paths (fix backslashes for Windows compatibility)
     books = books.map(book => ({
       ...book.toObject(),
       image: book.image ? book.image.replace(/\\/g, '/') : null
